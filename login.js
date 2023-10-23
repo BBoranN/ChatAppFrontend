@@ -9,8 +9,10 @@ export class Login extends HTMLDivElement{
         loginButton.className="login button";
         loginButton.addEventListener("click", async ()=>{
             const provider = new GoogleAuthProvider();
-            const {user:{displaName: name, email}} = await signInWithPopup(firebaseAuth,provider);
-            console.log(user);
+            
+            const userCrendtial = await signInWithPopup(firebaseAuth,provider);
+            console.log(userCrendtial.user);
+            this.hidden=true;
         });
     }
 }customElements.define("login-div",Login,{extends:"div"});

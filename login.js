@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseAuth } from "./FirebaseConfig";
 import { userSocket } from "./SocketService";
 import { userInformation } from "./userInformation";
+import { changePage } from ".";
 export class Login extends HTMLDivElement{
     constructor(){
         super();
@@ -18,6 +19,7 @@ export class Login extends HTMLDivElement{
             userInformation.profileImage= userCrendtial.user.photoURL;           
             this.hidden=true;
             userSocket.send(JSON.stringify(userInformation));
+            changePage();
         });
         this.className="login";
     }

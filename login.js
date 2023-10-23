@@ -1,5 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseAuth } from "./FirebaseConfig";
+import { userSocket } from "./SocketService";
+import { userInformation } from "./userInformation";
 export class Login extends HTMLDivElement{
     constructor(){
         super();
@@ -11,8 +13,12 @@ export class Login extends HTMLDivElement{
             const provider = new GoogleAuthProvider();
             
             const userCrendtial = await signInWithPopup(firebaseAuth,provider);
-            console.log(userCrendtial.user);
+            userInformation.displayName=userCrendtial.user.displayName;
+            userInformation.email= userCrendtial.user.email;
+            userInformation.profileImage= userCrendtial.user.photoURL;           
             this.hidden=true;
+            userSocket.send(JSON.stringify(userInformation));
         });
+        this.className="login";
     }
 }customElements.define("login-div",Login,{extends:"div"});

@@ -1,3 +1,4 @@
+import { ChatPanel } from "./chatPanel";
 
 export class MainPage extends HTMLDivElement{
     constructor(){
@@ -21,8 +22,7 @@ export class MainPage extends HTMLDivElement{
         parent.appendChild(friendsBar);
     }
     addChatPanel(){
-        let chatPanel= document.createElement("div");
-        chatPanel.className="ChatPanel";
+        let chatPanel = new ChatPanel();
         this.appendChild(chatPanel);
     }
 }customElements.define("main-page",MainPage,{extends:"div"});

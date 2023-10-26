@@ -14,11 +14,11 @@ export class Login extends HTMLDivElement{
             const provider = new GoogleAuthProvider();
             
             const userCrendtial = await signInWithPopup(firebaseAuth,provider);
-            userInformation.displayName=userCrendtial.user.displayName;
+            /* userInformation.displayName=userCrendtial.user.displayName;
             userInformation.email= userCrendtial.user.email;
             userInformation.profileImage= userCrendtial.user.photoURL;           
             this.hidden=true;
-            userSocket.send(JSON.stringify(userInformation));
+            userSocket.send(JSON.stringify(userInformation)); */
             changePage();
         });
         this.className="login";

@@ -4,6 +4,6 @@ userSocket.onopen = () =>{
     console.log("websocket opened");
 };
 
-userSocket.onmessage = (event) =>{
+/* userSocket.onmessage = (event) =>{
     console.log(event.data);
-} 
+}  */

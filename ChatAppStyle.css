@@ -8,14 +8,6 @@
 }
 .MainPage{
     display: grid;
-   /* grid-template-rows: "a c c"
-                        "b c c"
-                        "b c c";
-                        grid-template: 
-                        "a a a" 25%
-                        "b c c" 25%
-                        "b c c" 25% 
-                        "b c c" 25% ;  */
     grid-template-columns: 300px 1fr;                    
     position: fixed;
     margin: 2%;
@@ -29,21 +21,16 @@
     height: 100%;
 }
 .UserPanel{
-    
-    /* width: 30%;
-    height: 10%; */
     background-color: rgb(69, 77, 87);
 }
 
 .FriendsBar{
     background-color: rgb(40, 48, 56);
-    /* margin-top: 7%; */
-    /* idth: 30%; */
-    /* height: 85%; */
+    
 }
 
 .ChatPanel{
-    background-color: rgb(17, 23, 54);
-    /* width: 70%;
-    height: 100% */;
+    background-color: rgb(80, 88, 129);
+    display: grid;
+    grid-template-rows: 90% auto;
 }

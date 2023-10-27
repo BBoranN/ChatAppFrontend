@@ -32,5 +32,15 @@
 .ChatPanel{
     background-color: rgb(80, 88, 129);
     display: grid;
-    grid-template-rows: 90% auto;
+    grid-template-rows: 95% auto;
+}
+.imageMessage{
+    max-width: 200px;
+    max-height: 200px;
+}
+.MessageBar{
+    display: grid;
+    grid-template-columns: 80% 10% 10%;
+    width: 100%;
+    height: 100%;
 }

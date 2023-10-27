@@ -5,3 +5,7 @@ export type userInformation={
     profileImage :string
 }
 
+export type message={
+    type:string,
+    content:string
+}

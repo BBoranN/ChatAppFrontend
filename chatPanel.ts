@@ -1,5 +1,5 @@
 import { userSocket } from "./SocketService";
-
+import { message } from "./types";
 export class ChatPanel extends HTMLDivElement{
     panel: HTMLDivElement;
     messageBar: MessageBar;
@@ -15,25 +15,30 @@ export class ChatPanel extends HTMLDivElement{
         this.append(this.messageBar);
 
         this.messageBar.sendButton.addEventListener("click",()=>{
-            let message= this.messageBar.getTextValue();
+            let messagex= this.messageBar.getTextValue();
             this.messageBar.setTextValue();
-        
-            userSocket.send(JSON.stringify(message));
+            let messageJson: message ={type:"text", content: messagex}
+            userSocket.send(JSON.stringify(messageJson));
         });
         userSocket.onmessage = (event) =>{
-            this.appendMessage(event.data);
+            console.log(event.data);
+            let incomingMessage= JSON.parse(event.data);
+            if (incomingMessage.type =='text'){
+                this.appendMessage(incomingMessage.content);
+            }
+            else if(incomingMessage.type=='image'){
+                this.appendImageMessage(incomingMessage.content);
+            }
         } 
-        this.messageBar.addFile.addEventListener("input",(event)=>{
-            let image = document.createElement("image");
-            
-            console.log(event);
-            
-        })
         this.messageBar.addFile.addEventListener("change",(event)=>{
-            let image = document.createElement("image");
-            
-            console.log(event);
-            
+            const file = (event.target!).files[0];
+            let url = window.URL.createObjectURL(file);
+            let newMessage: message={
+                "type":"image",
+                "content":url
+            }
+            userSocket.send(JSON.stringify(newMessage));
+            console.log(url);
         })
     }
     appendMessage(text){
@@ -42,7 +47,13 @@ export class ChatPanel extends HTMLDivElement{
         newBubble.className="Bubble";
         this.panel.appendChild(newBubble);
     }
-}customElements.define("chat-panelx",ChatPanel,{extends:"div"});
+    appendImageMessage(url){
+        let img = document.createElement("img");
+        img.className="imageMessage";
+        img.src=url;
+        this.panel.appendChild(img);
+    }
+}customElements.define("chat-panel",ChatPanel,{extends:"div"});
 
 class MessageBar extends HTMLDivElement{
     textBar;
@@ -50,8 +61,10 @@ class MessageBar extends HTMLDivElement{
     addFile : HTMLInputElement;
     constructor(){
         super();
-        this.textBar= document.createElement("textarea");
+        this.className="MessageBar";
+        this.textBar= document.createElement("input");
         this.textBar.placeholder="Enter your message";
+        this.textBar.type="text";
         this.sendButton= document.createElement("button");
         this.sendButton.innerHTML="Send Message";
         this.addFile=document.createElement("input");

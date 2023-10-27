@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseAuth } from "./FirebaseConfig";
 import { userSocket } from "./SocketService";
-import { userInformation } from "./userInformation";
+import { userInformation } from "./types";
 import { changePage } from ".";
 export class Login extends HTMLDivElement{
     constructor(){

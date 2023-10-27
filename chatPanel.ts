@@ -42,16 +42,21 @@ export class ChatPanel extends HTMLDivElement{
         })
     }
     appendMessage(text){
-        let newBubble = document.createElement("p");
-        newBubble.innerHTML=text;
+        let newText = document.createElement("p");
+        newText.innerHTML=text;
+        let newBubble = document.createElement("div");
         newBubble.className="Bubble";
+        newBubble.appendChild(newText);
         this.panel.appendChild(newBubble);
     }
     appendImageMessage(url){
         let img = document.createElement("img");
         img.className="imageMessage";
         img.src=url;
-        this.panel.appendChild(img);
+        let bubble = document.createElement("div");
+        bubble.className="Bubble";
+        bubble.appendChild(img);
+        this.panel.appendChild(bubble);
     }
 }customElements.define("chat-panel",ChatPanel,{extends:"div"});
 

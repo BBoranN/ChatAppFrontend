@@ -61,8 +61,8 @@ export class ChatPanel extends HTMLDivElement{
 }customElements.define("chat-panel",ChatPanel,{extends:"div"});
 
 class MessageBar extends HTMLDivElement{
-    textBar;
-    sendButton;
+    textBar: HTMLInputElement;
+    sendButton: HTMLButtonElement;
     addFile : HTMLInputElement;
     constructor(){
         super();

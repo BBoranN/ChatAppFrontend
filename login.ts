@@ -19,6 +19,7 @@ export class Login extends HTMLDivElement{
             userInformation.profileImage= userCrendtial.user.photoURL;           
             this.hidden=true;
             userSocket.send(JSON.stringify(userInformation)); */
+            console.log(userCrendtial);
             changePage();
         });
         this.className="login";

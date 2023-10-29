@@ -1,6 +1,7 @@
 /* import { httpRequest } from "./ConnectionService"; */
 import { ApiConnectionService } from "./ConnectionService";
 import { ChatPanel } from "./chatPanel";
+import { friend } from "./types";
 
 export class MainPage extends HTMLDivElement{
     constructor(){
@@ -28,3 +29,14 @@ export class MainPage extends HTMLDivElement{
         this.appendChild(chatPanel);
     }
 }customElements.define("main-page",MainPage,{extends:"div"});
+
+class FriendDiv extends HTMLDivElement{
+    friendId:string;
+    constructor(friend :friend){
+        super();
+        let displaName= document.createElement("p");
+        displaName.innerHTML=friend.displayName;
+        this.friendId= friend.friendId;
+        this.className="FriendDiv";
+    }
+}customElements.define("friend-div",FriendDiv,{extends:'div'});

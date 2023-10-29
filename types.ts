@@ -16,3 +16,8 @@ export type friend ={
     friendId:string,
     displayName:string
 }
+
+export type response={
+    id:string,
+    friends:friend[]
+}

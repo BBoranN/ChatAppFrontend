@@ -1,3 +1,5 @@
+/* import { httpRequest } from "./ConnectionService"; */
+import { ApiConnectionService } from "./ConnectionService";
 import { ChatPanel } from "./chatPanel";
 
 export class MainPage extends HTMLDivElement{

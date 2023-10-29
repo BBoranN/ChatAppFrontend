@@ -10,8 +10,6 @@ export class ChatPanel extends HTMLDivElement{
         this.messageBar= new MessageBar();
 
         this.append(this.panel);
-        
-
         this.append(this.messageBar);
 
         this.messageBar.sendButton.addEventListener("click",()=>{

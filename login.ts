@@ -3,6 +3,7 @@ import { firebaseAuth } from "./FirebaseConfig";
 import { userSocket } from "./SocketService";
 import { userInformation } from "./types";
 import { changePage } from ".";
+import { ApiConnectionService } from "./ConnectionService"; 
 export class Login extends HTMLDivElement{
     constructor(){
         super();
@@ -14,12 +15,11 @@ export class Login extends HTMLDivElement{
             const provider = new GoogleAuthProvider();
             
             const userCrendtial = await signInWithPopup(firebaseAuth,provider);
-            /* userInformation.displayName=userCrendtial.user.displayName;
-            userInformation.email= userCrendtial.user.email;
-            userInformation.profileImage= userCrendtial.user.photoURL;           
-            this.hidden=true;
-            userSocket.send(JSON.stringify(userInformation)); */
-            console.log(userCrendtial);
+            let user = {displaName :await userCrendtial.user.displayName,
+                        email: await userCrendtial.user.email};
+            
+            console.log(user);
+            await ApiConnectionService.getUserInformation(user);
             changePage();
         });
         this.className="login";

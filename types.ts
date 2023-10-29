@@ -1,8 +1,8 @@
 export type userInformation={
-    id:string,
+    id?:string,
     displayName: string,
     email :string,
-    profileImage :string
+    profileImage?:string
 }
 
 export type message={

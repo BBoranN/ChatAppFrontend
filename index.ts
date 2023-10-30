@@ -20,10 +20,10 @@ export function changePage(userInfo:response,user:userInformation){
         console.log(event.data);
             let incomingMessage= JSON.parse(event.data);
             if (incomingMessage.type =='text'){
-                mainPage.chatPanel.appendMessage(incomingMessage.content);
+                mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content);
             }
             else if(incomingMessage.type=='image'){
-                mainPage.chatPanel.appendImageMessage(incomingMessage.content);
+                mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content);
             }
     }
     

@@ -1,6 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { firebaseAuth } from "./FirebaseConfig";
-import { userSocket } from "./SocketService";
 import { userInformation } from "./types";
 import { changePage } from ".";
 import { ApiConnectionService } from "./ConnectionService"; 

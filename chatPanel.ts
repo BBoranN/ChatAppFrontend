@@ -1,10 +1,14 @@
 
-import { message } from "./types";
+import { friend, message, userInformation } from "./types";
 export class ChatPanel extends HTMLDivElement{
+    user: userInformation;
     panel: HTMLDivElement;
+    friendInfo:friend;
     messageBar: MessageBar;
-    constructor(userSocket:WebSocket){
+    constructor(userSocket:WebSocket,friend:friend,user:userInformation){
         super();
+        this.user=user;
+        this.friendInfo=friend;
         this.className="ChatPanel";
         this.panel = document.createElement("div");
         this.messageBar= new MessageBar();
@@ -13,9 +17,10 @@ export class ChatPanel extends HTMLDivElement{
         this.append(this.messageBar);
 
         this.messageBar.sendButton.addEventListener("click",()=>{
-            let messagex= this.messageBar.getTextValue();
+            let messageText= this.messageBar.getTextValue();
             this.messageBar.setTextValue();
-            let messageJson: message ={type:"text", content: messagex}
+            let messageJson: message ={type:"text", content: messageText,sender:user.id,reciever:friend[0]}
+            console.log(messageJson);
             userSocket.send(JSON.stringify(messageJson));
         });
         
@@ -24,7 +29,9 @@ export class ChatPanel extends HTMLDivElement{
             let url = window.URL.createObjectURL(file);
             let newMessage: message={
                 "type":"image",
-                "content":url
+                "content":url,
+                "sender":user.id,
+                "reciever":friend.friendId
             }
             userSocket.send(JSON.stringify(newMessage));
             console.log(url);

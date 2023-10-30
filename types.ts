@@ -9,7 +9,7 @@ export type message={
     type:string,
     content:string,
     sender?:string,
-    reciver?:string
+    reciever?:string
 }
 
 export type friend ={

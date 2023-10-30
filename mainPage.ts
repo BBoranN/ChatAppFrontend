@@ -8,8 +8,11 @@ export class MainPage extends HTMLDivElement{
     userInfo:response;
     user:userInformation;
     chatPanel:ChatPanel;
+    friendList: {};
+    chatList: {};
     constructor(userInfo:response,user:userInformation,userSocket: WebSocket){
         super();
+        this.chatList={};
         this.className="MainPage";
         this.userInfo=userInfo;
         this.user=user;
@@ -18,7 +21,11 @@ export class MainPage extends HTMLDivElement{
         this.appendChild(sideBar);
         this.addLeftPanel(sideBar);
         this.addFriendsBar(sideBar);
-        this.addChatPanel(userSocket);
+        for(let i=0;i<userInfo.friends.length;i++){
+            let newPanel= new ChatPanel(userSocket,userInfo.friends[i],user);
+            
+            this.chatList[userInfo.friends[i][0]]= newPanel;
+        }
     }
     addLeftPanel(parent){
         let leftUserPanel= document.createElement("div");
@@ -37,13 +44,25 @@ export class MainPage extends HTMLDivElement{
         parent.appendChild(friendsBar);
         for(let i=0; i<this.userInfo.friends.length;i++){
             let friend=new FriendDiv(this.userInfo.friends[i]);
+            friend.button.addEventListener("click",()=>{
+                this.switchPanel(this.userInfo.friends[i][0]);
+            });
             friendsBar.appendChild(friend);
+            //this.friendList[this.userInfo.friends[i].friendId]=friend;
         }
     }
-    addChatPanel(userSocket:WebSocket){
-        let chatPanel = new ChatPanel(userSocket);
-        this.chatPanel=chatPanel;
-        this.appendChild(chatPanel);
+    /* addChatPanel(userSocket:WebSocket){
+        if(this.chatPanel==null){
+            let chatPanel = new ChatPanel(userSocket);
+            this.chatPanel=chatPanel;
+            this.appendChild(chatPanel);
+        }
+    } */
+    switchPanel(id){
+        if(this.chatPanel)
+            this.removeChild(this.chatPanel);
+        this.chatPanel=this.chatList[id];
+        this.appendChild(this.chatPanel);
     }
 }customElements.define("main-page",MainPage,{extends:"div"});
 
@@ -58,5 +77,6 @@ class FriendDiv extends HTMLDivElement{
         this.className="FriendDiv";
         this.appendChild(this.button);
         this.button.className="FriendButton";
+        
     }
 }customElements.define("friend-div",FriendDiv,{extends:'div'});

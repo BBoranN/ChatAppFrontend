@@ -52,3 +52,9 @@ body{
 .Bubble{
     width: 100%;
 }
+.FriendButton{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(40, 48, 56);
+    border-style: outset;
+}

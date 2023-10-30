@@ -15,12 +15,15 @@ export class Login extends HTMLDivElement{
             const provider = new GoogleAuthProvider();
             
             const userCrendtial = await signInWithPopup(firebaseAuth,provider);
-            let user = {displaName :await userCrendtial.user.displayName,
-                        email: await userCrendtial.user.email};
+            let user:userInformation= {
+                        displayName :await userCrendtial.user.displayName!,
+                        email: await userCrendtial.user.email!,
+                        profileImage: await userCrendtial.user.photoURL!};
             
             console.log(user);
-            await ApiConnectionService.getUserInformation(user);
-            changePage();
+            let response =await ApiConnectionService.getUserInformation(user);
+            
+            changePage(response!,user);
         });
         this.className="login";
     }

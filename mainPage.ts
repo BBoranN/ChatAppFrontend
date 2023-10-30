@@ -7,7 +7,8 @@ import { friend, response, userInformation } from "./types";
 export class MainPage extends HTMLDivElement{
     userInfo:response;
     user:userInformation;
-    constructor(userInfo:response,user:userInformation){
+    chatPanel:ChatPanel;
+    constructor(userInfo:response,user:userInformation,userSocket: WebSocket){
         super();
         this.className="MainPage";
         this.userInfo=userInfo;
@@ -17,7 +18,7 @@ export class MainPage extends HTMLDivElement{
         this.appendChild(sideBar);
         this.addLeftPanel(sideBar);
         this.addFriendsBar(sideBar);
-        this.addChatPanel();
+        this.addChatPanel(userSocket);
     }
     addLeftPanel(parent){
         let leftUserPanel= document.createElement("div");
@@ -39,8 +40,9 @@ export class MainPage extends HTMLDivElement{
             friendsBar.appendChild(friend);
         }
     }
-    addChatPanel(){
-        let chatPanel = new ChatPanel();
+    addChatPanel(userSocket:WebSocket){
+        let chatPanel = new ChatPanel(userSocket);
+        this.chatPanel=chatPanel;
         this.appendChild(chatPanel);
     }
 }customElements.define("main-page",MainPage,{extends:"div"});

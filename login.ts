@@ -21,7 +21,8 @@ export class Login extends HTMLDivElement{
             
             console.log(user);
             let response =await ApiConnectionService.getUserInformation(user);
-            user.id=response?.id;
+            console.log(response);
+            user.id=(response?.id)?.toString();
             changePage(response!,user);
         });
         this.className="login";

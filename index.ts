@@ -19,11 +19,20 @@ export function changePage(userInfo:response,user:userInformation){
     userSocket.onmessage =(event)=>{
         console.log(event.data);
             let incomingMessage= JSON.parse(event.data);
-            if (incomingMessage.type =='text'){
-                mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content);
-            }
-            else if(incomingMessage.type=='image'){
-                mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content);
+            if(incomingMessage.reciever!=user.id){
+                if (incomingMessage.type =='text'){
+                    mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content);
+                }
+                else if(incomingMessage.type=='image'){
+                    mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content);
+                }
+            }else{
+                if (incomingMessage.type =='text'){
+                    mainPage.chatList[incomingMessage.sender].appendMessage(incomingMessage.content);
+                }
+                else if(incomingMessage.type=='image'){
+                    mainPage.chatList[incomingMessage.sender].appendImageMessage(incomingMessage.content);
+                }
             }
     }
     

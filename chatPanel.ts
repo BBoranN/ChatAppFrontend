@@ -18,16 +18,7 @@ export class ChatPanel extends HTMLDivElement{
             let messageJson: message ={type:"text", content: messagex}
             userSocket.send(JSON.stringify(messageJson));
         });
-        /* userSocket.onmessage = (event) =>{
-            console.log(event.data);
-            let incomingMessage= JSON.parse(event.data);
-            if (incomingMessage.type =='text'){
-                this.appendMessage(incomingMessage.content);
-            }
-            else if(incomingMessage.type=='image'){
-                this.appendImageMessage(incomingMessage.content);
-            }
-        }  */
+        
         this.messageBar.addFile.addEventListener("change",(event)=>{
             const file = (event.target!).files[0];
             let url = window.URL.createObjectURL(file);

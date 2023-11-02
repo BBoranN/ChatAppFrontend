@@ -25,16 +25,29 @@ export class ChatPanel extends HTMLDivElement{
         });
         
         this.messageBar.addFile.addEventListener("change",(event)=>{
-            const file = (event.target!).files[0];
-            let url = window.URL.createObjectURL(file);
-            let newMessage: message={
+            //const file = (event.target!).files[0];
+            const file =this.messageBar.addFile.files![0];
+            //let url = window.URL.createObjectURL(file);
+            var reader  = new FileReader();
+            let url;
+            reader.onloadend = function () {
+                url = reader.result;
+                let newMessage: message={
+                    "type":"image",
+                    "content":url,
+                    "sender":user.id,
+                    "reciever":friend[0]
+                }
+                userSocket.send(JSON.stringify(newMessage));
+            }
+            reader.readAsDataURL(file);
+            /* let newMessage: message={
                 "type":"image",
                 "content":url,
                 "sender":user.id,
-                "reciever":friend.friendId
+                "reciever":friend[0]
             }
-            userSocket.send(JSON.stringify(newMessage));
-            console.log(url);
+            userSocket.send(JSON.stringify(newMessage)); */
         })
     }
     public appendMessage(text){

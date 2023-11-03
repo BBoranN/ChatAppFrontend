@@ -7,7 +7,7 @@ export type userInformation={
 
 export type message={
     type:string,
-    content:string,
+    content:string|ArrayBuffer,
     sender?:string,
     reciever?:string
 }

@@ -17,21 +17,21 @@ export function changePage(userInfo:response,user:userInformation){
     document.body.appendChild(mainPage);
     
     userSocket.onmessage =(event)=>{
-        console.log(event.data);
+        //console.log(event.data);
             let incomingMessage= JSON.parse(event.data);
             if(incomingMessage.reciever!=user.id){
                 if (incomingMessage.type =='text'){
-                    mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content);
+                    mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content,"right");
                 }
                 else if(incomingMessage.type=='image'){
-                    mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content);
+                    mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content,"right");
                 }
             }else{
                 if (incomingMessage.type =='text'){
-                    mainPage.chatList[incomingMessage.sender].appendMessage(incomingMessage.content);
+                    mainPage.chatList[incomingMessage.sender].appendMessage(incomingMessage.content,"left");
                 }
                 else if(incomingMessage.type=='image'){
-                    mainPage.chatList[incomingMessage.sender].appendImageMessage(incomingMessage.content);
+                    mainPage.chatList[incomingMessage.sender].appendImageMessage(incomingMessage.content,"left");
                 }
             }
     }

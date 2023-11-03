@@ -21,3 +21,8 @@ export type response={
     id:string,
     friends:friend[]
 }
+export type bubblePlace="right"|"left";
+export enum location{
+    right="right",
+    left="left"
+}

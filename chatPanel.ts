@@ -1,5 +1,5 @@
 
-import { friend, message, userInformation } from "./types";
+import { location,bubblePlace, friend, message, userInformation } from "./types";
 export class ChatPanel extends HTMLDivElement{
     user: userInformation;
     panel: HTMLDivElement;
@@ -50,20 +50,28 @@ export class ChatPanel extends HTMLDivElement{
             userSocket.send(JSON.stringify(newMessage)); */
         })
     }
-    public appendMessage(text){
+    public appendMessage(text,place:bubblePlace){
         let newText = document.createElement("p");
         newText.innerHTML=text;
         let newBubble = document.createElement("div");
-        newBubble.className="Bubble";
+        if(place ==location.left){
+            newBubble.className="LeftBubble";
+        }else{
+            newBubble.className="RightBubble";
+        }
         newBubble.appendChild(newText);
         this.panel.appendChild(newBubble);
     }
-    public appendImageMessage(url){
+    public appendImageMessage(url,place:bubblePlace){
         let img = document.createElement("img");
         img.className="imageMessage";
         img.src=url;
         let bubble = document.createElement("div");
-        bubble.className="Bubble";
+        if(place ==location.left){
+            bubble.className="LeftBubble";
+        }else{
+            bubble.className="RightBubble";
+        }
         bubble.appendChild(img);
         this.panel.appendChild(bubble);
     }

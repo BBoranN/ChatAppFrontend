@@ -26,7 +26,7 @@ export function changePage(userInfo:response,user:userInformation){
                 else if(incomingMessage.type=='image'){
                     mainPage.chatList[incomingMessage.reciever].appendImageMessage(incomingMessage.content,"right");
                 }else if(incomingMessage.type =='file'){
-                    mainPage.chatList[incomingMessage.reciever].appendFileMessage(incomingMessage.content,"right");
+                    mainPage.chatList[incomingMessage.reciever].appendFileMessage(incomingMessage.content,"right",incomingMessage.fileName);
                 }
             }else{
                 if (incomingMessage.type =='text'){
@@ -35,7 +35,7 @@ export function changePage(userInfo:response,user:userInformation){
                 else if(incomingMessage.type=='image'){
                     mainPage.chatList[incomingMessage.sender].appendImageMessage(incomingMessage.content,"left");
                 }else if(incomingMessage.type =='file'){
-                    mainPage.chatList[incomingMessage.sender].appendFileMessage(incomingMessage.content,"left");
+                    mainPage.chatList[incomingMessage.sender].appendFileMessage(incomingMessage.content,"left",incomingMessage.fileName);
                 }
             }
     }

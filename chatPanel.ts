@@ -53,12 +53,12 @@ export class ChatPanel extends HTMLDivElement{
         this.messageBar.addFile.addEventListener("change",()=>{
             let file = this.messageBar.addFile.files![0];
             var reader  = new FileReader();
-
             reader.onloadend = function () {
                 let url = reader.result;
                 let newMessage: message={
                     type:"file",
                     content:url!,
+                    fileName:file.name,
                     sender:user.id,
                     reciever:friend[0]
                 } 
@@ -92,8 +92,27 @@ export class ChatPanel extends HTMLDivElement{
         bubble.appendChild(img);
         this.panel.appendChild(bubble);
     }
-    public appendFileMessage(url,place:bubblePlace){
-        console.log(url);
+    public appendFileMessage(url,place:bubblePlace,fileName:string){
+        //console.log(url);
+        //const blob= URL.createObjectURL(url);
+        //const file= new File([new Blob([url])],"new file");
+        /* var arr = url.split(',');
+        var mime= arr[0].match(/:(.*?);/)[1];
+        const file= new File([new Blob([url])], "file", {type:mime});
+        console.log(file); */
+        var dFile= document.createElement('a');
+        let bubble = document.createElement("div");
+        if(place ==location.left){
+            bubble.className="LeftBubble";
+        }else{
+            bubble.className="RightBubble";
+        }
+        dFile.className='dFile';
+        dFile.href=url;
+        dFile.download=fileName;
+        dFile.innerHTML=fileName;
+        bubble.appendChild(dFile);
+        this.panel.appendChild(bubble);
     }
 }customElements.define("chat-panel",ChatPanel,{extends:"div"});
 

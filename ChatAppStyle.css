@@ -56,6 +56,7 @@ img{
 }
 .RightBubble{
     width: 100%;
+    min-height: 5%;
     display: flex;
     justify-content: flex-end;
 }
@@ -76,4 +77,8 @@ img{
 p{
     color:rgba(233, 216, 216, 0.781);
     font-size: 17px;
+}
+.dFile{
+    font-size: 17px;
+    color: rgba(233, 216, 216, 0.781);
 }

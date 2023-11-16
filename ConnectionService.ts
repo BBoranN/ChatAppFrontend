@@ -6,7 +6,8 @@ export class ApiConnectionService{
     }
     static async getUserInformation(userInformation): Promise<response|null>{
         try{
-            const response = await fetch("http://localhost:8089/UserInfo",{
+            const response = await fetch("http://localhost:8089/UserInfo"
+            /* "https://agalarchat-1fc8ccec3c82.herokuapp.com/UserInfo" */,{
                 method: "POST",
                 body: JSON.stringify(userInformation),
                 headers:{

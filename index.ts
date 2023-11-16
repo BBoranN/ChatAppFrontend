@@ -7,7 +7,8 @@ import { message, response, userInformation } from "./types";
 
 export function changePage(userInfo:response,user:userInformation){
     console.log(userInfo.friends[0][0]);
-    let userSocket = new WebSocket("ws://localhost:8089");
+    //let userSocket = new WebSocket("ws://localhost:8089");
+    let userSocket = new WebSocket("ws://agalarchat-1fc8ccec3c82.herokuapp.com");
     userSocket.onopen= ()=>{
         let connectionMessage: message={type:"login", content:userInfo.id};
         userSocket.send(JSON.stringify(connectionMessage));

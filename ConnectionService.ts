@@ -23,8 +23,8 @@ export class ApiConnectionService{
     }
     static async updateFriends(friendList): Promise<friend[]|null>{
         try{
-            const response = await fetch("http://localhost:8089/UserInfo"
-            /* "https://agalarchat-1fc8ccec3c82.herokuapp.com/UserInfo" */,{
+            const response = await fetch("http://localhost:8089/addToFriends"
+            /* "https://agalarchat-1fc8ccec3c82.herokuapp.com/addToFriends" */,{
                 method: "PUT",
                 body: JSON.stringify(friendList),
                 headers:{

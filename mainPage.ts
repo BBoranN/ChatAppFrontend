@@ -20,6 +20,17 @@ export class MainPage extends HTMLDivElement{
         sideBar.className="SideBar";
         this.appendChild(sideBar);
         this.addLeftPanel(sideBar);
+
+        let addFriendB= document.createElement("button");
+        addFriendB.innerHTML="Yeni bir sohbet başlatın";
+        addFriendB.className="AddFriend";
+        sideBar.appendChild(addFriendB);
+
+        addFriendB.addEventListener("click",()=>{
+            let popup= new PopupDiv();
+            document.body.appendChild(popup);
+        });
+
         this.addFriendsBar(sideBar);
         for(let i=0;i<userInfo.friends.length;i++){
             let newPanel= new ChatPanel(userSocket,userInfo.friends[i],user);
@@ -80,3 +91,30 @@ class FriendDiv extends HTMLDivElement{
         
     }
 }customElements.define("friend-div",FriendDiv,{extends:'div'});
+
+class PopupDiv extends HTMLDivElement{
+    add: HTMLButtonElement;
+    constructor(){
+        super();
+        this.className="Popup";
+        let info= document.createElement("p");
+        info.innerHTML="Please enter the email of the user you want to chat with:";
+        this.appendChild(info);
+
+        let inputForm= document.createElement("input");
+        inputForm.placeholder="Enter here";
+        this.appendChild(inputForm);
+
+        this.add= document.createElement("button");
+        this.add.innerHTML="Add Friend";
+        this.appendChild(this.add);
+
+        let cancel= document.createElement("button");
+        cancel.innerHTML="Cancel";
+        this.appendChild(cancel);
+
+        cancel.addEventListener("click",()=>{
+            this.parentNode?.removeChild(this);
+        })
+    }
+}customElements.define("popup-div",PopupDiv,{extends:'div'});

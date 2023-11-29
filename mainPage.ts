@@ -2,12 +2,13 @@
 import { UserInfo } from "firebase/auth";
 import { ApiConnectionService } from "./ConnectionService";
 import { ChatPanel } from "./chatPanel";
-import { friend, response, userInformation } from "./types";
+import { friend, response, userInformation, friendRequest } from "./types";
 
 export class MainPage extends HTMLDivElement{
     userInfo:response;
     user:userInformation;
     chatPanel:ChatPanel;
+    friendsBar: HTMLDivElement;
     friendList: {};
     chatList: {};
     constructor(userInfo:response,user:userInformation,userSocket: WebSocket){
@@ -29,11 +30,17 @@ export class MainPage extends HTMLDivElement{
         addFriendB.addEventListener("click",()=>{
             let popup= new PopupDiv();
             document.body.appendChild(popup);
+            popup.add.addEventListener("click",()=>{
+                ApiConnectionService.updateFriends({friendEmail:popup.inputField.value,userId:(user.id)!});
+                /* let request : friendRequest{userId: this.user.id}
+                userSocket.send(request) */
+                document.body.removeChild(popup);
+            });
         });
 
         this.addFriendsBar(sideBar);
         for(let i=0;i<userInfo.friends.length;i++){
-            let newPanel= new ChatPanel(userSocket,userInfo.friends[i],user);
+            let newPanel= new ChatPanel(userSocket,{friendId:userInfo.friends[i][0],displayName:userInfo.friends[i][1]},user);
             
             this.chatList[userInfo.friends[i][0]]= newPanel;
         }
@@ -50,25 +57,35 @@ export class MainPage extends HTMLDivElement{
         parent.appendChild(leftUserPanel);
     }
     addFriendsBar(parent){
-        let friendsBar= document.createElement("div");
-        friendsBar.className="FriendsBar";
-        parent.appendChild(friendsBar);
+        this.friendsBar= document.createElement("div");
+        this.friendsBar.className="FriendsBar";
+        parent.appendChild(this.friendsBar);
         for(let i=0; i<this.userInfo.friends.length;i++){
-            let friend=new FriendDiv(this.userInfo.friends[i]);
+            let friend=new FriendDiv({friendId: this.userInfo.friends[i][0], displayName:this.userInfo.friends[i][1]});
             friend.button.addEventListener("click",()=>{
                 this.switchPanel(this.userInfo.friends[i][0]);
             });
-            friendsBar.appendChild(friend);
+            this.friendsBar.appendChild(friend);
             //this.friendList[this.userInfo.friends[i].friendId]=friend;
         }
     }
-    /* addChatPanel(userSocket:WebSocket){
-        if(this.chatPanel==null){
-            let chatPanel = new ChatPanel(userSocket);
-            this.chatPanel=chatPanel;
-            this.appendChild(chatPanel);
+    updateFriends(newList,userSocket){
+        for(let key in newList){
+            if(this.chatList[key]){
+                continue;
+            }else{
+                let newPanel= new ChatPanel(userSocket,{friendId:key,displayName:newList[key]},this.user);
+                this.chatList[key]= newPanel;
+
+                let friend=new FriendDiv({friendId:key,displayName:newList[key]});
+                this.friendsBar.appendChild(friend);
+                friend.button.addEventListener("click",()=>{
+                    this.switchPanel(key);
+                });
+            }
         }
-    } */
+
+    }
     switchPanel(id){
         if(this.chatPanel)
             this.removeChild(this.chatPanel);
@@ -83,7 +100,8 @@ class FriendDiv extends HTMLDivElement{
     constructor(friend :friend){
         super();
         this.button= document.createElement("button");
-        this.button.innerHTML=friend[1];
+        this.button.innerHTML=friend.displayName;
+        console.log(friend,friend[1],friend[0]);
         this.friendId= friend.friendId;
         this.className="FriendDiv";
         this.appendChild(this.button);
@@ -94,6 +112,7 @@ class FriendDiv extends HTMLDivElement{
 
 class PopupDiv extends HTMLDivElement{
     add: HTMLButtonElement;
+    inputField: HTMLInputElement;
     constructor(){
         super();
         this.className="Popup";
@@ -101,9 +120,9 @@ class PopupDiv extends HTMLDivElement{
         info.innerHTML="Please enter the email of the user you want to chat with:";
         this.appendChild(info);
 
-        let inputForm= document.createElement("input");
-        inputForm.placeholder="Enter here";
-        this.appendChild(inputForm);
+        this.inputField= document.createElement("input");
+        this.inputField.placeholder="Enter here";
+        this.appendChild(this.inputField);
 
         this.add= document.createElement("button");
         this.add.innerHTML="Add Friend";

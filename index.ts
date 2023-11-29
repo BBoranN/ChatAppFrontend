@@ -17,8 +17,8 @@ export function changePage(userInfo:response,user:userInformation){
     document.body.appendChild(mainPage);
     
     userSocket.onmessage =(event)=>{
-        //console.log(event.data);
-            let incomingMessage= JSON.parse(event.data);
+        let incomingMessage= JSON.parse(event.data);
+        if(incomingMessage.type !='addFriend'){
             if(incomingMessage.reciever!=user.id){
                 if (incomingMessage.type =='text'){
                     mainPage.chatList[incomingMessage.reciever].appendMessage(incomingMessage.content,"right");
@@ -38,6 +38,10 @@ export function changePage(userInfo:response,user:userInformation){
                     mainPage.chatList[incomingMessage.sender].appendFileMessage(incomingMessage.content,"left",incomingMessage.fileName);
                 }
             }
+        }else{
+            console.log(incomingMessage.newList);
+            mainPage.updateFriends(incomingMessage.newList,userSocket);
+        }
     }
     
     

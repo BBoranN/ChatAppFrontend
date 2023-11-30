@@ -21,7 +21,7 @@ body{
 }
 .SideBar{
     display: grid;
-    grid-template-rows: 10% auto;
+    grid-template-rows: 10% 3% auto;
     height: 100%;
 }
 .UserPanel{
@@ -81,4 +81,16 @@ p{
 .dFile{
     font-size: 17px;
     color: rgba(233, 216, 216, 0.781);
+}
+.AddFriend{
+    background-color: #202c33;
+    color: #86a3b3;
+}
+.Popup{
+    position: absolute;
+    z-index: 9;
+    top:20%;
+    left:40%;
+    width: 30%;
+    background-color: #4c7f9b;
 }

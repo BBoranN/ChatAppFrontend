@@ -19,7 +19,7 @@ export class ChatPanel extends HTMLDivElement{
         this.messageBar.sendButton.addEventListener("click",()=>{
             let messageText= this.messageBar.getTextValue();
             this.messageBar.setTextValue();
-            let messageJson: message ={type:"text", content: messageText,sender:user.id,reciever:friend[0]}
+            let messageJson: message ={type:"text", content: messageText,sender:user.id,reciever:friend.friendId}
             console.log(messageJson);
             userSocket.send(JSON.stringify(messageJson));
         });
@@ -36,7 +36,7 @@ export class ChatPanel extends HTMLDivElement{
                     type:"image",
                     content:url,
                     sender:user.id,
-                    reciever:friend[0]
+                    reciever:friend.friendId
                 } 
                 userSocket.send(JSON.stringify(newMessage));
             }
@@ -60,7 +60,7 @@ export class ChatPanel extends HTMLDivElement{
                     content:url!,
                     fileName:file.name,
                     sender:user.id,
-                    reciever:friend[0]
+                    reciever:friend.friendId
                 } 
                 userSocket.send(JSON.stringify(newMessage));
             }

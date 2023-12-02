@@ -135,10 +135,40 @@ class MessageBar extends HTMLDivElement{
         this.addFile=document.createElement("input");
         this.addFile.type="file";
 
+        this.addFile.id="file-input";
+        let addFileLabel = document.createElement("label");
+        addFileLabel.htmlFor="file-input";
+        let addFileImg = document.createElement("img");
+        addFileLabel.appendChild(addFileImg);
+        addFileImg.src="./imagess/docs.png";
+
+        this.addFileImage.id="image-input";
+        let addFileImgLabel = document.createElement("label");
+        addFileImgLabel.htmlFor="image-input";
+        let addFileImgImg = document.createElement("img");
+        addFileImgLabel.appendChild(addFileImgImg);
+        addFileImgImg.src="./imagess/gallery.png";
+
+        this.sendButton.id="message-input";
+        let MessageSendLabel = document.createElement("label");
+        MessageSendLabel.htmlFor="message-input";
+        let MessageSendImg = document.createElement("img");
+        MessageSendLabel.appendChild(MessageSendImg);
+        MessageSendImg.src="./imagess/sendmessage.png";
+
+
+
+    
+        
+        
+
         this.appendChild(this.textBar);
         this.appendChild(this.sendButton);
+        this.appendChild(MessageSendLabel);
         this.appendChild(this.addFileImage);
+        this.appendChild(addFileImgLabel);
         this.appendChild(this.addFile);
+        this.appendChild(addFileLabel);
     }
     getTextValue(){
         return this.textBar.value.toString();

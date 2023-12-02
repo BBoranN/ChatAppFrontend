@@ -119,15 +119,17 @@ class PopupDiv extends HTMLDivElement{
         let info= document.createElement("p");
         info.innerHTML="Please enter the email of the user you want to chat with:";
         this.appendChild(info);
-
+        
+        
         this.inputField= document.createElement("input");
         this.inputField.placeholder="Enter here";
         this.appendChild(this.inputField);
-
+        
+        
         this.add= document.createElement("button");
         this.add.innerHTML="Add Friend";
         this.appendChild(this.add);
-
+        
         let cancel= document.createElement("button");
         cancel.innerHTML="Cancel";
         this.appendChild(cancel);

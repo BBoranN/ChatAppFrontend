@@ -6,8 +6,8 @@ export class ApiConnectionService{
     }
     static async getUserInformation(userInformation): Promise<response|null>{
         try{
-            const response = await fetch("http://localhost:8089/UserInfo"
-            /* "https://agalarchat-1fc8ccec3c82.herokuapp.com/UserInfo" */,{
+            const response = await fetch(
+             "https://agalarchat-1fc8ccec3c82.herokuapp.com/UserInfo" ,{
                 method: "POST",
                 body: JSON.stringify(userInformation),
                 headers:{
@@ -23,8 +23,8 @@ export class ApiConnectionService{
     }
     static async updateFriends(Request:addFriendRequest): Promise<friend[]|null>{
         try{
-            const response = await fetch("http://localhost:8089/addToFriends"
-            /* "https://agalarchat-1fc8ccec3c82.herokuapp.com/addToFriends" */,{
+            const response = await fetch(
+            "https://agalarchat-1fc8ccec3c82.herokuapp.com/addToFriends" ,{
                 method: "PUT",
                 body:  JSON.stringify(Request),
                 headers:{

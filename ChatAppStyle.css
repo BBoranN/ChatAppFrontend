@@ -30,9 +30,11 @@ body{
 }
 img{
     border-radius: 50%;
+    margin: 10px 10px 10px;
 }
 
 .FriendsBar{
+    margin-top: 10px;
     background-color: rgb(40, 48, 56);
     
 }
@@ -49,7 +51,7 @@ img{
 }
 .MessageBar{
     display: grid;
-    grid-template-columns: 80% 10% 10%;
+    grid-template-columns: 85% 5% 5% 5%;
     width: 100%;
     height: 100%;
     background-color: #202c33;
@@ -73,6 +75,12 @@ img{
     background-color: rgb(40, 48, 56);
     border-style: outset;
     color:rgba(233, 216, 216, 0.781);
+    cursor: pointer;
+    border: none;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5);
+}
+.FriendButton:hover{
+    background-color: rgb(12, 35, 92);
 }
 p{
     color:rgba(233, 216, 216, 0.781);
@@ -83,8 +91,13 @@ p{
     color: rgba(233, 216, 216, 0.781);
 }
 .AddFriend{
-    background-color: #202c33;
+    background-color: #051f2e;
     color: #86a3b3;
+    height: 25px;
+    cursor: pointer;
+}
+.AddFriend:hover{
+    background-color: rgb(4, 18, 53);
 }
 .Popup{
     position: absolute;
@@ -93,4 +106,16 @@ p{
     left:40%;
     width: 30%;
     background-color: #4c7f9b;
+}
+#file-input{
+    display: none;
+}
+#image-input{
+    display: none;
+}
+#message-input{
+    display: none;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
 }

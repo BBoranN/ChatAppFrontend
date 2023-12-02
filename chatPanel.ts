@@ -1,4 +1,5 @@
 
+import * as path from 'path';
 import { location,bubblePlace, friend, message, userInformation } from "./types";
 export class ChatPanel extends HTMLDivElement{
     user: userInformation;
@@ -138,23 +139,27 @@ class MessageBar extends HTMLDivElement{
         this.addFile.id="file-input";
         let addFileLabel = document.createElement("label");
         addFileLabel.htmlFor="file-input";
-        let addFileImg = document.createElement("img");
+        let addFileImg = document.createElement("svg");
         addFileLabel.appendChild(addFileImg);
-        addFileImg.src="./imagess/docs.png";
+        addFileImg.innerHTML = ` <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+        <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 176v160M336 256H176"/>
+      </svg>`;
+        
 
         this.addFileImage.id="image-input";
         let addFileImgLabel = document.createElement("label");
         addFileImgLabel.htmlFor="image-input";
-        let addFileImgImg = document.createElement("img");
+        let addFileImgImg = document.createElement("svg");
         addFileImgLabel.appendChild(addFileImgImg);
-        addFileImgImg.src="./imagess/gallery.png";
+        addFileImgImg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><rect x="48" y="80" width="416" height="352" rx="48" ry="48" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><circle cx="336" cy="176" r="32" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path d="M304 335.79l-90.66-90.49a32 32 0 00-43.87-1.3L48 352M224 432l123.34-123.34a32 32 0 0143.11-2L464 368" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>`;
 
         this.sendButton.id="message-input";
         let MessageSendLabel = document.createElement("label");
         MessageSendLabel.htmlFor="message-input";
-        let MessageSendImg = document.createElement("img");
+        let MessageSendImg = document.createElement("svg");
         MessageSendLabel.appendChild(MessageSendImg);
-        MessageSendImg.src="./imagess/sendmessage.png";
+        MessageSendImg.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M53.12 199.94l400-151.39a8 8 0 0110.33 10.33l-151.39 400a8 8 0 01-15-.34l-67.4-166.09a16 16 0 00-10.11-10.11L53.46 215a8 8 0 01-.34-15.06zM460 52L227 285" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>`;
 
 
 

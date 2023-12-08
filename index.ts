@@ -7,7 +7,7 @@ let userSocket;
 let userId;
 export function changePage(userInfo:response,user:userInformation){
     //userSocket = new WebSocket("ws://localhost:8089");
-    userSocket = new WebSocket("ws://agalarchat-1fc8ccec3c82.herokuapp.com");
+    userSocket = new WebSocket("wss://agalarchat-1fc8ccec3c82.herokuapp.com");
     userSocket.onopen= ()=>{
         let connectionMessage: message={type:"login", content:userInfo.id};
         userSocket.send(JSON.stringify(connectionMessage));
